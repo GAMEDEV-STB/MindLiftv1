@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="MindLift — A complete offline mental health micro-support system for students. Emotion detection, breathing therapy, mood-boosting games, focus timer, journaling, and chatbot.">
+    <title>MindLift — Mental Health Micro Support for Students</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ── NAVIGATION ── -->
+    <nav>
+        <div class="logo">🧠 MindLift</div>
+        <ul class="nav-links">
+            <li><a href="#detector">Detect</a></li>
+            <li><a href="#breathing-section">Breathe</a></li>
+            <li><a href="#games-section">Games</a></li>
+            <li><a href="#mood-section">Mood</a></li>
+            <li><a href="#gratitude-section">Gratitude</a></li>
+            <li><a href="#focus-section">Timer</a></li>
+            <li><a href="#chat-section">Chat</a></li>
+            <li><a href="#resources-section">Help</a></li>
+        </ul>
+    </nav>
+
+    <!-- ── HERO ── -->
+    <section class="hero">
+        <h1>Your Mind Matters 💙</h1>
+        <p>A safe, private micro-support platform for students. Detect emotions, play mood-boosting games, practice
+            breathing, track moods, journal, and chat — all fully offline.</p>
+        <div class="hero-btns">
+            <a href="#detector" class="btn btn-primary">🎭 Detect Emotion</a>
+            <a href="#games-section" class="btn btn-accent">🎮 Play Games</a>
+            <a href="#breathing-section" class="btn btn-outline">🌬️ Breathe</a>
+        </div>
+    </section>
+
+    <!-- ── FEATURES GRID ── -->
+    <section class="section" id="features">
+        <h2 class="section-title">Everything You Need</h2>
+        <p class="section-sub">All features work fully offline — no API keys, no cloud, just you.</p>
+        <div class="card-grid">
+            <div class="card animate-in">
+                <div class="card-icon purple">🎭</div>
+                <h3>Emotion Detection</h3>
+                <p>Real-time emotion reading via webcam with smart support suggestions.</p>
+            </div>
+            <div class="card animate-in">
+                <div class="card-icon green">🌬️</div>
+                <h3>Breathing Therapy</h3>
+                <p>Three modes — Relax, Deep Calm, Quick Calm — with guided animation.</p>
+            </div>
+            <div class="card animate-in">
+                <div class="card-icon orange">🎮</div>
+                <h3>Mood Boosting Games</h3>
+                <p>Balloon Pop, Color Calm, and Catch the Smile — play your stress away.</p>
+            </div>
+            <div class="card animate-in">
+                <div class="card-icon purple">📊</div>
+                <h3>Mood Dashboard</h3>
+                <p>Track your mood with emojis. See weekly insights and trends.</p>
+            </div>
+            <div class="card animate-in">
+                <div class="card-icon green">🙏</div>
+                <h3>Gratitude Journal</h3>
+                <p>Write something positive daily. Gratitude rewires your brain for happiness.</p>
+            </div>
+            <div class="card animate-in">
+                <div class="card-icon orange">⏱️</div>
+                <h3>Focus Timer</h3>
+                <p>Pomodoro-style timer to boost productivity with structured breaks.</p>
+            </div>
+            <div class="card animate-in">
+                <div class="card-icon purple">📝</div>
+                <h3>Private Journal</h3>
+                <p>Write freely — everything stays on your device, never shared.</p>
+            </div>
+            <div class="card animate-in">
+                <div class="card-icon green">🤖</div>
+                <h3>MindBot Chat</h3>
+                <p>Rule-based chatbot that understands common student struggles.</p>
+            </div>
+            <div class="card animate-in">
+                <div class="card-icon orange">📞</div>
+                <h3>Crisis Resources</h3>
+                <p>Quick access to helplines and professional support contacts.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- ── EMOTION DETECTION ── -->
+    <!-- ══════════════════════════════════════ -->
+    <section class="section" id="detector">
+        <h2 class="section-title">Emotion Detection</h2>
+        <p class="section-sub">Start your camera for real-time emotion reading every 2 seconds.</p>
+        <div style="text-align:center">
+            <div class="video-wrap">
+                <video id="cam" autoplay playsinline width="400" height="300"></video>
+                <div class="live-emotion-overlay" id="liveEmotionOverlay"></div>
+            </div>
+            <div class="det-controls">
+                <button class="btn btn-primary btn-sm" id="btnStartCam" onclick="startCamera()">📷 Start Camera</button>
+                <button class="btn btn-accent btn-sm" onclick="detectEmotion()">🎯 Detect Now</button>
+                <button class="btn btn-outline btn-sm" onclick="stopCamera()">⏹ Stop</button>
+            </div>
+            <div id="emotion-result" class="emotion-result"></div>
+        </div>
+        <!-- Smart Suggestions Panel -->
+        <div id="smartSuggestions" class="smart-suggestions" style="display:none"></div>
+    </section>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- ── ADVANCED BREATHING ── -->
+    <!-- ══════════════════════════════════════ -->
+    <section class="section" id="breathing-section">
+        <h2 class="section-title">Breathing Therapy</h2>
+        <p class="section-sub">Choose a mode and follow the circle. Inhale… Hold… Exhale…</p>
+        <div style="text-align:center">
+            <!-- Mode Selector -->
+            <div class="breath-mode-selector">
+                <button class="breath-mode-btn active" data-mode="relax" onclick="selectBreathMode('relax')">🟢 Relax
+                    (4-4)</button>
+                <button class="breath-mode-btn" data-mode="deep" onclick="selectBreathMode('deep')">🔵 Deep Calm
+                    (4-7-8)</button>
+                <button class="breath-mode-btn" data-mode="quick" onclick="selectBreathMode('quick')">⚡ Quick Calm
+                    (3-3)</button>
+            </div>
+            <div class="breath-circle-wrap">
+                <div class="breath-circle" id="breathCircle"></div>
+                <div class="breath-label" id="breathLabel">Press Start</div>
+            </div>
+            <div id="breathTimer" class="breath-timer">00:00</div>
+            <div class="breath-controls">
+                <button class="btn btn-primary btn-sm" onclick="startBreathing()">▶ Start</button>
+                <button class="btn btn-outline btn-sm" onclick="stopBreathing()">⏹ Stop</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- ── MOOD BOOSTING GAMES ── -->
+    <!-- ══════════════════════════════════════ -->
+    <section class="section" id="games-section">
+        <h2 class="section-title">Mood Boosting Games</h2>
+        <p class="section-sub">Play to relieve stress and boost your mood — no scores pressure, just fun.</p>
+
+        <!-- Game Tabs -->
+        <div class="game-tabs">
+            <button class="game-tab active" onclick="switchGame('balloon',this)">🎈 Balloon Pop</button>
+            <button class="game-tab" onclick="switchGame('color',this)">🎨 Color Calm</button>
+            <button class="game-tab" onclick="switchGame('smile',this)">😊 Catch the Smile</button>
+        </div>
+
+        <!-- Game 1: Balloon Pop -->
+        <div class="game-panel" id="game-balloon">
+            <div class="game-header">
+                <h3>🎈 Balloon Pop</h3>
+                <div class="game-score">Score: <span id="balloonScore">0</span></div>
+            </div>
+            <p class="game-desc">Click the floating balloons — each pop reveals a positive message!</p>
+            <div class="balloon-area" id="balloonArea"></div>
+            <div id="balloonMsg" class="balloon-pop-msg"></div>
+            <div class="game-controls">
+                <button class="btn btn-primary btn-sm" onclick="startBalloonGame()">▶ Start</button>
+                <button class="btn btn-outline btn-sm" onclick="stopBalloonGame()">⏹ Stop</button>
+            </div>
+        </div>
+
+        <!-- Game 2: Color Calm -->
+        <div class="game-panel" id="game-color" style="display:none">
+            <div class="game-header">
+                <h3>🎨 Color Calm</h3>
+                <div class="game-score">Score: <span id="colorScore">0</span></div>
+            </div>
+            <div id="colorInstruction" class="color-instruction">Press Start to play</div>
+            <div class="color-grid" id="colorGrid"></div>
+            <div class="game-controls">
+                <button class="btn btn-primary btn-sm" onclick="startColorGame()">▶ Start</button>
+            </div>
+        </div>
+
+        <!-- Game 3: Catch the Smile -->
+        <div class="game-panel" id="game-smile" style="display:none">
+            <div class="game-header">
+                <h3>😊 Catch the Smile</h3>
+                <div class="game-score">Caught: <span id="smileScore">0</span> / 10</div>
+            </div>
+            <p class="game-desc">Move your mouse to catch the falling smiley faces!</p>
+            <canvas id="smileCanvas" width="600" height="380"></canvas>
+            <div id="smileComplete" class="smile-complete" style="display:none">
+                🎉 Great! You just boosted your mood!
+            </div>
+            <div class="game-controls">
+                <button class="btn btn-primary btn-sm" onclick="startSmileGame()">▶ Start</button>
+                <button class="btn btn-outline btn-sm" onclick="stopSmileGame()">⏹ Stop</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- ── MOOD TRACKER DASHBOARD ── -->
+    <!-- ══════════════════════════════════════ -->
+    <section class="section" id="mood-section">
+        <h2 class="section-title">Mood Tracker</h2>
+        <p class="section-sub">Tap an emoji to log how you feel right now.</p>
+        <div style="text-align:center">
+            <div class="mood-selector">
+                <button class="mood-btn" onclick="selectMood(this,5,'Happy')">😀</button>
+                <button class="mood-btn" onclick="selectMood(this,3,'Neutral')">😐</button>
+                <button class="mood-btn" onclick="selectMood(this,2,'Sad')">😔</button>
+                <button class="mood-btn" onclick="selectMood(this,1,'Angry')">😡</button>
+                <button class="mood-btn" onclick="selectMood(this,2,'Tired')">😴</button>
+                <button class="mood-btn" onclick="selectMood(this,1,'Stressed')">😰</button>
+            </div>
+            <div id="moodInsight" class="mood-insight"></div>
+            <div class="mood-chart">
+                <div class="mood-chart-content" id="moodChartContent"></div>
+            </div>
+            <div id="moodHistory" class="mood-history"></div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- ── GRATITUDE JOURNAL ── -->
+    <!-- ══════════════════════════════════════ -->
+    <section class="section" id="gratitude-section">
+        <h2 class="section-title">Gratitude Journal 🙏</h2>
+        <p class="section-sub">Write one thing you're grateful for today. Small steps rewire your brain for happiness.
+        </p>
+        <div style="max-width:600px;margin:0 auto;text-align:center">
+            <textarea id="gratitudeArea" class="journal-area" rows="4" placeholder="Today I'm grateful for…"></textarea>
+            <div style="text-align:right;margin-top:10px">
+                <button class="btn btn-accent btn-sm" onclick="saveGratitude()">🙏 Save Gratitude</button>
+            </div>
+            <div id="gratitudeEntries" class="journal-entries" style="margin-top:20px"></div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- ── PRIVATE JOURNAL ── -->
+    <!-- ══════════════════════════════════════ -->
+    <section class="section" id="journal-section">
+        <h2 class="section-title">Private Journal</h2>
+        <p class="section-sub">Write freely. Everything stays on your device.</p>
+        <div style="max-width:600px;margin:0 auto;text-align:center">
+            <textarea id="journalArea" class="journal-area" rows="5"
+                placeholder="What's on your mind today?"></textarea>
+            <div style="text-align:right;margin-top:10px">
+                <button class="btn btn-primary btn-sm" onclick="saveJournal()">💾 Save Entry</button>
+            </div>
+            <div id="journalEntries" class="journal-entries" style="margin-top:20px"></div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- ── FOCUS TIMER ── -->
+    <!-- ══════════════════════════════════════ -->
+    <section class="section" id="focus-section">
+        <h2 class="section-title">Focus Timer ⏱️</h2>
+        <p class="section-sub">Pomodoro technique: 25 minutes of focused work, then a break. You've got this!</p>
+        <div style="text-align:center">
+            <div class="timer-ring-wrap">
+                <svg class="timer-ring" width="220" height="220" viewBox="0 0 220 220">
+                    <circle class="timer-ring-bg" cx="110" cy="110" r="96" />
+                    <circle class="timer-ring-fill" id="focusRing" cx="110" cy="110" r="96" />
+                </svg>
+                <div class="timer-display" id="focusDisplay">25:00</div>
+            </div>
+            <div id="focusComplete" class="focus-complete" style="display:none">
+                🎉 Time's up! Great focus session. Take a 5-minute break!
+            </div>
+            <div class="breath-controls" style="margin-top:20px">
+                <button class="btn btn-primary btn-sm" onclick="startFocusTimer()">▶ Start</button>
+                <button class="btn btn-outline btn-sm" onclick="pauseFocusTimer()">⏸ Pause</button>
+                <button class="btn btn-outline btn-sm" onclick="resetFocusTimer()">🔄 Reset</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- ── CHATBOT ── -->
+    <!-- ══════════════════════════════════════ -->
+    <section class="section" id="chat-section">
+        <h2 class="section-title">Talk to MindBot 🤖</h2>
+        <p class="section-sub">Tell MindBot how you're feeling. It listens, understands, and offers support.</p>
+        <div class="chat-container">
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="chat-input-wrap">
+                <input type="text" id="chatInput" placeholder="Type how you're feeling…">
+                <button class="chat-send" onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- ── RESOURCES ── -->
+    <!-- ══════════════════════════════════════ -->
+    <section class="section" id="resources-section">
+        <h2 class="section-title">Mental Health Helplines</h2>
+        <p class="section-sub">You're never alone. Professional help is just a phone call away.</p>
+        <div class="resource-list">
+            <div class="resource-item">
+                <div class="resource-icon">📞</div>
+                <div class="resource-info">
+                    <h4>iCall — Psychosocial Helpline</h4>
+                    <p>9152987821 (Mon–Sat, 8am–10pm)</p>
+                </div>
+            </div>
+            <div class="resource-item">
+                <div class="resource-icon">💛</div>
+                <div class="resource-info">
+                    <h4>Vandrevala Foundation</h4>
+                    <p>1860-2662-345 (24/7, multilingual)</p>
+                </div>
+            </div>
+            <div class="resource-item">
+                <div class="resource-icon">🌐</div>
+                <div class="resource-info">
+                    <h4>NIMHANS Helpline</h4>
+                    <p>080-46110007 (24/7)</p>
+                </div>
+            </div>
+            <div class="resource-item">
+                <div class="resource-icon">🤝</div>
+                <div class="resource-info">
+                    <h4>Snehi</h4>
+                    <p>044-24640050</p>
+                </div>
+            </div>
+            <div class="resource-item">
+                <div class="resource-icon">🎓</div>
+                <div class="resource-info">
+                    <h4>iCall TISS</h4>
+                    <p>022-25521111</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer>
+        <p>MindLift — Built with 💙 for student wellbeing. All data stays on your device. Fully offline.</p>
+    </footer>
+
+    <script src="face-api.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
