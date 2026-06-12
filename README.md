@@ -1,7 +1,5 @@
 ---
 
-# Mindlift
-
 **Mindlift** is an intelligent platform designed to elevate cognitive performance, track mental well-being, and streamline focus. By combining data-driven insights with a seamless user experience, Mindlift helps users optimize their daily mental workflow and conquer burnout.
 
 ---
